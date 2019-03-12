@@ -2,13 +2,12 @@
   "name": "cra-test",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server",
   "scripts": {
     "dev": "concurrently --kill-others-on-fail \"yarn server:dev\" \"yarn client:dev\"",
     "build": "cd client && yarn build",
-    "prod": "NODE_ENV=production PORT=3000 yarn start",
+    "prod": "NODE_ENV=production node server",
     "client:dev": "cd client && yarn start",
-    "server": "node server",
     "server:dev": "nodemon --inspect=0.0.0.0 server"
   },
   "author": "",
@@ -17,9 +16,10 @@
     "body-parser": "^1.18.3",
     "compression": "^1.7.3",
     "express": "^4.16.4",
-    "nodemon": "^1.18.10",
+    "nodemon": "^1.18.10"
   },
   "devDependencies": {
-    "concurrently": "^4.1.0"
+    "concurrently": "^4.1.0",
+    "http-proxy-middleware": "^0.19.1"
   }
 }

@@ -12,7 +12,7 @@ This repo is a bare-bones boilerplate which can be used to start a React based p
 
 #### `yarn dev`
 
-Runs the Express server on port 3001 and the create-react-app server on port 3000. The development server will attempt to send requests without text/html in its Accept header to the express server using a proxy.
+Runs the Express server on port 3000 and the create-react-app server on port 3001. All requests not matched in the express app's routing will be sent through to the create-react-app server.
 
 #### `yarn build`
 
@@ -21,16 +21,6 @@ Runs the create-react-app build process. This produces a production optimized st
 #### `yarn prod`
 
 Runs the Express server in production mode on port 3000, and automatically serves static content from `client/build`.
-
-## Why the Port Trickery?
-
-You may have noticed that the API server runs on port 3001 in dev and 3000 in prod. Why? Because this actually enables a consistent environment where you can switch between dev and prod without changing ports. You should always connect to port 3000 to view your project.
- 
-In dev the CRA server proxies the Express server because CRA has this option built in.
-  
-In prod the Express server serves static assets from the CRA build.
-
-Port consistency for the servers would be nice but it doesn't practically affect how this project is used in any way.
 
 ## Further Development
 
