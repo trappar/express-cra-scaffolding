@@ -1,16 +1,13 @@
 const express = require('express');
-const compression = require('compression');
-const bodyParser = require('body-parser');
 const path = require('path');
 const proxy = require('http-proxy-middleware');
+const middleware = require('./middleware');
 
 const port = parseInt(process.env.PORT, 10) || 3000;
 const prod = process.env.NODE_ENV === 'production';
 const app = express();
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(compression());
+middleware.defaults(app);
 
 if (prod) {
     app.use(express.static(path.resolve(__dirname, '..', 'client', 'build')));
@@ -27,7 +24,10 @@ if (prod) {
     });
 } else {
     // Proxy all other requests to react's dev server
-    app.use(proxy('/', { target: 'http://localhost:3001' }));
+    app.use(proxy('/', {
+        target: 'http://localhost:3001',
+        ws: true
+    }));
 }
 
 app.listen(port, () => console.log(`App launched -> http://localhost:${port}`));

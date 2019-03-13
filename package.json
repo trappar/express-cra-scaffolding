@@ -4,11 +4,11 @@
   "description": "",
   "main": "server",
   "scripts": {
-    "dev": "concurrently --kill-others-on-fail \"yarn server:dev\" \"yarn client:dev\"",
+    "dev": "concurrently --kill-others-on-fail \"yarn dev:client\" \"yarn dev:server\"",
+    "dev:client": "cd client && yarn start",
+    "dev:server": "nodemon --inspect=0.0.0.0 server",
     "build": "cd client && yarn build",
-    "prod": "NODE_ENV=production node server",
-    "client:dev": "cd client && yarn start",
-    "server:dev": "nodemon --inspect=0.0.0.0 server"
+    "prod": "NODE_ENV=production node server"
   },
   "author": "",
   "license": "ISC",
